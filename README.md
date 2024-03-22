@@ -2,12 +2,23 @@
 
 ## Setup
 
-#### Backend
-* Install Java version >= 17
-* Install Meaven
+#### Frontend
 
+- Install Node.js
+
+#### Backend
+
+- Install Java version >= 17
+- Install Maven
 
 ## Run
+
 #### Backend
-    cd backend
+
+    cd frontend
+    npm start
+
+#### Backend
+
+    cd Backend
     ./mvnw spring-boot:run
