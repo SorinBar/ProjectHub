@@ -16,6 +16,7 @@
 #### Backend
 
     cd frontend
+    npm install
     npm start
 
 #### Backend
