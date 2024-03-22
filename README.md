@@ -13,7 +13,7 @@
 
 ## Run
 
-#### Backend
+#### Frontend
 
     cd frontend
     npm install
