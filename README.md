@@ -11,6 +11,11 @@
 - Install Java version >= 17
 - Install Maven
 
+#### Database
+
+- Install Docker
+- Install Docker Compose
+
 ## Run
 
 #### Frontend
@@ -23,3 +28,14 @@
 
     cd Backend
     ./mvnw spring-boot:run
+
+#### Database
+    
+    # Create the database
+    sudo docker compose up -d
+    
+    # Start the database
+    sudo docker start ProjectHubDB
+
+    # Connect to the database
+    psql -h localhost -p 5432 -U scott
