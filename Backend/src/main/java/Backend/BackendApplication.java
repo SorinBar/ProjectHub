@@ -1,4 +1,6 @@
 package Backend;
+import Backend.Setup.BackendSetup;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,9 +18,21 @@ public class BackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
 	}
+
+	@PostConstruct
+	public void setup() {
+		int status = BackendSetup.setup(jdbcTemplate);
+		if (status == 0) {
+			System.out.println("Successful setup");
+		} else {
+			System.out.println("Setup error");
+			System.exit(-1);
+		}
+	}
+
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		String sql = "INSERT INTO EMPLOYEES (name, age, salary) VALUES ('John Doe', 30, 2000)";
+		String sql = "INSERT INTO USERS (EMAIL, PASSWORD, ROLE) VALUES ('test@gmail.com', 'hash1', 'Project Manager')";
 
 
 		int rows = jdbcTemplate.update(sql);
