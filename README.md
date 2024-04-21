@@ -32,10 +32,10 @@
 #### Database
     
     # Create the database
-    sudo docker compose up -d
+    docker compose up -d
     
     # Start the database
-    sudo docker start ProjectHubDB
+    docker start ProjectHubDB
 
     # Connect to the database
     psql -h localhost -p 5432 -U scott
