@@ -19,8 +19,13 @@ public class User {
 
     @Override
     public String toString() {
-        return id + " " + email + " " + password + " " + role;
+        return "User Details:\n" +
+                "ID: " + id + "\n" +
+                "Email: " + email + "\n" +
+                "Password: " + password + "\n" +
+                "Role: " + role;
     }
+
 
     public Long getId() {
         return id;

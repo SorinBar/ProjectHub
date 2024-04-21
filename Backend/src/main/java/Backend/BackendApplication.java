@@ -1,11 +1,12 @@
 package Backend;
-import Backend.Controlers.UserController;
+import Backend.Services.UserService;
 import Backend.Setup.BackendSetup;
 import Backend.Types.User;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class BackendApplication {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	private UserController userController;
+	private UserService userService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
@@ -34,27 +35,20 @@ public class BackendApplication {
 		}
 
 		// Controllers setup
-		userController = new UserController(jdbcTemplate);
+		userService = new UserService(jdbcTemplate);
 
 
 	}
 
 	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		userController.insert(new User(1L, "test@gmail.com", "123", "Employee"));
-
-		return String.format("Hello %s!", name);
+	public ResponseEntity<String> hello(@RequestParam(value = "name", defaultValue = "World") String name) {
+		userService.insert(new User(20L, "test@gmail.com", "123", "Employee"));
+		User user =  userService.findByEmail("test@gmail.com");
+		if (user != null) {
+			return ResponseEntity.ok().build();
+		} else {
+			return ResponseEntity.notFound().build();
+		}
 	}
-
-
-//	public void insert(Employee employee) {
-//		String sql = "INSERT INTO employees (id, name, age, salary) VALUES (?, ?, ?, ?)";
-//		jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getAge(), employee.getSalary());
-//	}
-//
-//	public Employee findById(Long id) {
-//		String sql = "SELECT id, name, age, salary FROM employees WHERE id = ?";
-//		return jdbcTemplate.queryForObject(sql, new EmployeeRowMapper(), id);
-//	}
 
 }
