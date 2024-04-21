@@ -1,6 +1,8 @@
 package Backend.Services;
 import Backend.Types.User;
 import Backend.Mappers.UserRowMapper;
+import org.postgresql.util.PSQLException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -11,9 +13,15 @@ public class UserService {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void create(User user) {
-        String sql = "INSERT INTO USERS (EMAIL, PASSWORD, ROLE) VALUES (?, ?, ?)";
-        jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), user.getRole());
+    public int create(User user) {
+        try {
+            String sql = "INSERT INTO USERS (EMAIL, PASSWORD, ROLE) VALUES (?, ?, ?)";
+            jdbcTemplate.update(sql, user.getEmail(), user.getPassword(), user.getRole());
+            return 0;
+        } catch (DataAccessException e) {
+            System.out.println(e.getMessage());
+            return -1;
+        }
     }
 
     public void insert(User user) {

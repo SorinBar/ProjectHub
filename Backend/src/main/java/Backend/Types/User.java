@@ -6,6 +6,8 @@ public class User {
     private String password;
     private String role;
 
+    public User() {}
+
     public User(String email, String password, String role) {
         this.email = email;
         this.password = password;
@@ -53,5 +55,9 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public boolean isValid() {
+        return email != null && password != null && role != null && (role.equals("Employee") || role.equals("Project Manager"));
     }
 }

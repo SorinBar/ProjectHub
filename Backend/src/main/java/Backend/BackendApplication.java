@@ -1,14 +1,18 @@
 package Backend;
+import Backend.RequestTypes.SignInRequest;
 import Backend.Security.JwtUtil;
 import Backend.Services.UserService;
 import Backend.Setup.BackendSetup;
 import Backend.Types.User;
+import Backend.ResponseTypes.SignInResponse;
 import jakarta.annotation.PostConstruct;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -45,10 +49,9 @@ public class BackendApplication {
 	@GetMapping("/hello")
 	public ResponseEntity<String> hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		userService.insert(new User(20L, "test@gmail.com", "123", "Employee"));
-		User user =  userService.findByEmail("test@gmail.com");
+		User user = userService.findByEmail("test@gmail.com");
 
 		//	Test JWT
-
 		String token = JwtUtil.generateToken(1L);
 		String token1 = JwtUtil.generateToken(1L);
 		System.out.println(token);
@@ -62,4 +65,35 @@ public class BackendApplication {
 		}
 	}
 
+	@GetMapping("/api/signup")
+	public ResponseEntity<String> signup(@RequestBody @NotNull User user) {
+		if (!user.isValid()) {
+			return ResponseEntity.badRequest().build();
+		}
+		if (userService.create(user) != 0) {
+			return ResponseEntity.status(409).build();
+		} else {
+			return ResponseEntity.ok().build();
+		}
+	}
+
+	@GetMapping("/api/signin")
+	public ResponseEntity<SignInResponse> signin(@RequestBody @NotNull SignInRequest signInRequest) {
+		if (!signInRequest.isValid()) {
+			return ResponseEntity.badRequest().build();
+		}
+
+		User user = userService.findByEmail(signInRequest.getEmail());
+		if (user == null) {
+			return ResponseEntity.notFound().build();
+		}
+		if (!user.getPassword().equals(signInRequest.getPassword())) {
+			return  ResponseEntity.badRequest().build();
+		}
+
+		return ResponseEntity.ok().body(new SignInResponse(
+				user,
+				JwtUtil.generateToken(user.getId())
+		));
+	}
 }
