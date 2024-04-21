@@ -1,4 +1,5 @@
 package Backend;
+import Backend.Security.JwtUtil;
 import Backend.Services.UserService;
 import Backend.Setup.BackendSetup;
 import Backend.Types.User;
@@ -36,14 +37,24 @@ public class BackendApplication {
 
 		// Controllers setup
 		userService = new UserService(jdbcTemplate);
-
-
+		// TODO Dashboard
+		// TODO Dashboard_Employees
+		// TODO Dashboard_Tasks
 	}
 
 	@GetMapping("/hello")
 	public ResponseEntity<String> hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		userService.insert(new User(20L, "test@gmail.com", "123", "Employee"));
 		User user =  userService.findByEmail("test@gmail.com");
+
+		//	Test JWT
+
+		String token = JwtUtil.generateToken(1L);
+		String token1 = JwtUtil.generateToken(1L);
+		System.out.println(token);
+		System.out.println(JwtUtil.validateToken(token, 1L));
+		System.out.println(JwtUtil.validateToken(token, 2L));
+
 		if (user != null) {
 			return ResponseEntity.ok().build();
 		} else {

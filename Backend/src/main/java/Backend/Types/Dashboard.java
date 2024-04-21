@@ -20,7 +20,7 @@ public class Dashboard {
         return "Dashboard Details:\n" +
                 "ID: " + id + "\n" +
                 "Name: " + name + "\n" +
-                "PM ID: " + pmId;
+                "Project Manager ID: " + pmId;
     }
 
     public Long getId() {
