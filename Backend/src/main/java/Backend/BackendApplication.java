@@ -1,5 +1,7 @@
 package Backend;
+import Backend.Controlers.UserController;
 import Backend.Setup.BackendSetup;
+import Backend.Types.User;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class BackendApplication {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	private UserController userController;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
@@ -21,6 +24,7 @@ public class BackendApplication {
 
 	@PostConstruct
 	public void setup() {
+		//	Database setup
 		int status = BackendSetup.setup(jdbcTemplate);
 		if (status == 0) {
 			System.out.println("Successful setup");
@@ -28,18 +32,29 @@ public class BackendApplication {
 			System.out.println("Setup error");
 			System.exit(-1);
 		}
+
+		// Controllers setup
+		userController = new UserController(jdbcTemplate);
+
+
 	}
 
 	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		String sql = "INSERT INTO USERS (EMAIL, PASSWORD, ROLE) VALUES ('test@gmail.com', 'hash1', 'Project Manager')";
+		userController.insert(new User(1L, "test@gmail.com", "123", "Employee"));
 
-
-		int rows = jdbcTemplate.update(sql);
-		if (rows > 0) {
-			System.out.println("A new row has been inserted.");
-		}
 		return String.format("Hello %s!", name);
 	}
+
+
+//	public void insert(Employee employee) {
+//		String sql = "INSERT INTO employees (id, name, age, salary) VALUES (?, ?, ?, ?)";
+//		jdbcTemplate.update(sql, employee.getId(), employee.getName(), employee.getAge(), employee.getSalary());
+//	}
+//
+//	public Employee findById(Long id) {
+//		String sql = "SELECT id, name, age, salary FROM employees WHERE id = ?";
+//		return jdbcTemplate.queryForObject(sql, new EmployeeRowMapper(), id);
+//	}
 
 }
