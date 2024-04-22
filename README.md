@@ -29,9 +29,14 @@
     cd Backend
     ./mvnw spring-boot:run
 
+#### Backend - Quick Run
+
+    cd Backend/target
+    java -jar Backend-0.0.1-SNAPSHOT.jar  
+
 #### Database
     
-    # Create the database
+    # Create the database (run only once)
     docker compose up -d
     
     # Start the database
@@ -39,3 +44,6 @@
 
     # Connect to the database
     psql -h localhost -p 5432 -U scott
+
+    # Stop the database
+    docker stop ProjectHubDB
