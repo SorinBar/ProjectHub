@@ -20,7 +20,7 @@
 
 #### Frontend
 
-    cd frontend
+    cd Frontend
     npm install
     npm start
 
