@@ -14,10 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
@@ -57,7 +54,6 @@ public class BackendApplication {
 		userService.insert(new User(20L, "test@gmail.com", "123", "Employee"));
 		User user = userService.findByEmail("test@gmail.com");
 		System.out.println(user);
-		System.out.println(passwordEncoder.encode(user.getPassword()));
 
 		// Test JWT
 		String token = JwtUtils.generateToken(1L);
@@ -73,7 +69,7 @@ public class BackendApplication {
 		}
 	}
 
-	@GetMapping("/api/signup")
+	@PostMapping("/api/signup")
 	public ResponseEntity<String> signup(@RequestBody @NotNull User user) {
 		if (!user.isValid()) {
 			return ResponseEntity.badRequest().build();
@@ -86,7 +82,7 @@ public class BackendApplication {
 		}
 	}
 
-	@GetMapping("/api/signin")
+	@PostMapping("/api/signin")
 	public ResponseEntity<SignInResponse> signin(@RequestBody @NotNull SignInRequest signInRequest) {
 		if (!signInRequest.isValid()) {
 			return ResponseEntity.badRequest().build();
