@@ -1,4 +1,5 @@
 package Backend;
+
 import Backend.RequestTypes.SignInRequest;
 import Backend.Security.JwtUtil;
 import Backend.Services.UserService;
@@ -30,7 +31,7 @@ public class BackendApplication {
 
 	@PostConstruct
 	public void setup() {
-		//	Database setup
+		// Database setup
 		int status = BackendSetup.setup(jdbcTemplate);
 		if (status == 0) {
 			System.out.println("Successful setup");
@@ -52,14 +53,12 @@ public class BackendApplication {
 		User user = userService.findByEmail("test@gmail.com");
 		System.out.println(user);
 
-		//	Test JWT
+		// Test JWT
 		String token = JwtUtil.generateToken(1L);
 		System.out.println(token);
-//		System.out.println(JwtUtil.validateToken(
-//				"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzE0ODMyMzA4LCJpYXQiOjE3MTM5NjgzMDh9.nT4Je2y-eGh6IeJzd1Ii6ewQNssAra7v6RhFqM9J0uA",
-//				1L));
-
-
+		// System.out.println(JwtUtil.validateToken(
+		// "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzE0ODMyMzA4LCJpYXQiOjE3MTM5NjgzMDh9.nT4Je2y-eGh6IeJzd1Ii6ewQNssAra7v6RhFqM9J0uA",
+		// 1L));
 
 		if (user != null) {
 			return ResponseEntity.ok().build();
@@ -91,12 +90,11 @@ public class BackendApplication {
 			return ResponseEntity.notFound().build();
 		}
 		if (!user.getPassword().equals(signInRequest.getPassword())) {
-			return  ResponseEntity.badRequest().build();
+			return ResponseEntity.badRequest().build();
 		}
 
 		return ResponseEntity.ok().body(new SignInResponse(
 				user,
-				JwtUtil.generateToken(user.getId())
-		));
+				JwtUtil.generateToken(user.getId())));
 	}
 }
