@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JwtUtil {
+public class JwtUtils {
     private static final String SECRET_KEY = Dotenv.configure().load().get("JWT_SECRET_KEY");
     private static final long EXPIRATION_TIME = 864_000_000; // 10 days
 
