@@ -50,13 +50,16 @@ public class BackendApplication {
 	public ResponseEntity<String> hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		userService.insert(new User(20L, "test@gmail.com", "123", "Employee"));
 		User user = userService.findByEmail("test@gmail.com");
+		System.out.println(user);
 
 		//	Test JWT
 		String token = JwtUtil.generateToken(1L);
-		String token1 = JwtUtil.generateToken(1L);
 		System.out.println(token);
-		System.out.println(JwtUtil.validateToken(token, 1L));
-		System.out.println(JwtUtil.validateToken(token, 2L));
+//		System.out.println(JwtUtil.validateToken(
+//				"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzE0ODMyMzA4LCJpYXQiOjE3MTM5NjgzMDh9.nT4Je2y-eGh6IeJzd1Ii6ewQNssAra7v6RhFqM9J0uA",
+//				1L));
+
+
 
 		if (user != null) {
 			return ResponseEntity.ok().build();
