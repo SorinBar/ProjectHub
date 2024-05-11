@@ -1,0 +1,166 @@
+/* General Layout */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    background-color: #f0f0f0;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 240px;
+    background-color: #c41e3a;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* User Details Styles */
+.user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Board List Styles */
+.board-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.board-list-item {
+    padding: 10px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.board-list-item:hover {
+    background-color: #cccccc;
+}
+
+/* Main Board Area Styles */
+.main-board {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    border-left: 1px solid #ccc;
+}
+
+/* Board Header Styles */
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1; 
+}
+
+/* Highlight the active board */
+.board-list-item.active {
+    background-color: #d0e0e0;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Add Collaborator Button Styles */
+.add-collaborator {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-left: auto; /* Push button to the right */
+}
+
+/* Task Item Styles */
+.item {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #e9e9e9;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.item:hover {
+    background-color: #d0d0d0;
+}
+
+/* Board Columns Container */
+.board-columns {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* Ensures columns take up all available space */
+}
+
+/* Individual Column Styles */
+.column {
+    flex: 1; /* Each column takes equal space */
+    margin: 0 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.column-header {
+    padding: 15px 20px;
+    background-color: #cdc8c8;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.column-content {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+
+.create-board {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.create-board:hover {
+    background-color: #367c39;
+}
+
+
+.remove-board {
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.remove-board:hover {
+    background-color: #d32f2f;
+}
