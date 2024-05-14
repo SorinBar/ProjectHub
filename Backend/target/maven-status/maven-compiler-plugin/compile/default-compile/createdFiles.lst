@@ -1,6 +1,6 @@
-Backend/Mappers/UserRowMapper.class
 Backend/BackendApplication.class
-Backend/Setup/BackendSetup.class
 Backend/Types/Dashboard.class
 Backend/Types/User.class
+Backend/Mappers/UserRowMapper.class
+Backend/Setup/BackendSetup.class
 Backend/Mappers/DashboardRowMapper.class

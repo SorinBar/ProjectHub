@@ -2,9 +2,10 @@
 /home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/Mappers/UserRowMapper.java
 /home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/RequestTypes/SignInRequest.java
 /home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/Types/User.java
+/home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/Config/CorsConfig.java
 /home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/ResponseTypes/SignInResponse.java
 /home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/Mappers/DashboardRowMapper.java
 /home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/Setup/BackendSetup.java
-/home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/Security/JwtUtil.java
 /home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/Types/Dashboard.java
 /home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/Services/UserService.java
+/home/sorin/Workspace/ProjectHub/Backend/src/main/java/Backend/Security/JwtUtils.java
