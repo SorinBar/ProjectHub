@@ -164,3 +164,10 @@
 .remove-board:hover {
     background-color: #d32f2f;
 }
+
+
+.add-task-bottom-right {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+}

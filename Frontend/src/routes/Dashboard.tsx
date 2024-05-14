@@ -42,7 +42,14 @@ function Dashboard() {
     
     const handleAddCollaborator = () => {
         alert("Functionality to add a collaborator goes here.");
+        //TODO
         // Add functionality to add a collaborator
+    };
+
+    const handleAddTask = (board: string) => {
+        //TODO
+        // Add functionality to add a task to the specified board
+        alert(`Add task to ${board}`);
     };
     
     return (
@@ -80,6 +87,9 @@ function Dashboard() {
                         <p>Content for {selectedBoard}</p>
                         <button onClick={handleAddCollaborator} className="add-collaborator">
                             + Add Collaborator
+                        </button>
+                        <button onClick={() => handleAddTask(selectedBoard)} className="add-task-bottom-right">
+                                + Add Task
                         </button>
                         </div>
                     <div className="board-columns">
