@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import '../style/Dashboard.css'
+import backgroundImage from '../style/background_auth.png';
 
 // TODO: Creare Design Dashboard
 

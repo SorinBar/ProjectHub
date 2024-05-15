@@ -9,12 +9,13 @@
 /* Sidebar Styles */
 .sidebar {
     width: 240px;
-    background-color: #c41e3a;
+    background: linear-gradient(to bottom, #212121, #c41e3a, #212121);
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    z-index: 3;
 }
 
 /* User Details Styles */
@@ -23,6 +24,7 @@
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    color: #ffffff;
 }
 
 /* Board List Styles */
@@ -52,6 +54,21 @@
     padding: 20px;
     background-color: #ffffff;
     border-left: 1px solid #ccc;
+    z-index: 2;
+    position: relative;
+}
+
+.main-board::before{
+    background-image: url('../style/background_auth.png');
+    content: "";
+    background-image: url('../style/background_auth.png');
+    opacity: 0.5; /* adjust as needed */
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
 }
 
 /* Board Header Styles */

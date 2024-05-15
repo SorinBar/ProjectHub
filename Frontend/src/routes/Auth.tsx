@@ -1,13 +1,14 @@
 import { useContext, useState } from 'react';
 
 import logo from '../logo.png';
-import '../style/Auth.css'
+import '../style/Auth.css';
 import axios, { Axios, AxiosError, isAxiosError } from 'axios';
 import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
 
 function Auth() {
+  const backgroundVideo = require('../style/background_auth_video.webm');
   const navigate = useNavigate();
   const { setUserEmail, setUserRole, setUserJwt } = useContext(UserContext);
   const [email, setEmail] = useState<string>('');
@@ -120,6 +121,13 @@ function Auth() {
     
   return (
     <div className="App">
+      <div className="background_auth">
+        <video autoPlay loop muted>
+          <source src={backgroundVideo} type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
       <div className="header">
         <div className="logo">
         <img src={logo} alt="logo"></img>
@@ -130,26 +138,26 @@ function Auth() {
         <input type="checkbox" id="chk" aria-hidden="true" />
 
       <div className="signup">
-      <form className='auth-form'>
-        <label htmlFor="chk">Sign up</label>
-        <input type="email" name="email" placeholder="Email" onChange={handleEmailChange} required />
-        <input type="password" name="pswd" placeholder="Password" onChange={handlePasswordChange} required />
-        <button className='auth-button' onClick={handleSignUp}>Sign up</button>
-        <div id="app-cover" onClick={toggleRole}>
-          <div className="row">
-            <div className="toggle-button-cover">
-              <div className="button-cover">
-                <div className="button r" id="button-1">
-                  <input type="checkbox" className="checkbox" checked={role === 'Project Manager'} readOnly />
-                  <div className="knobs"></div>
-                  <div className="layer"></div>
+          <form className='auth-form'>
+            <label htmlFor="chk">Sign up</label>
+            <input type="email" name="email" placeholder="Email" onChange={handleEmailChange} required />
+            <input type="password" name="pswd" placeholder="Password" onChange={handlePasswordChange} required />
+            <button className='auth-button' onClick={handleSignUp}>Sign up</button>
+            <div id="app-cover" onClick={toggleRole}>
+              <div className="row">
+                <div className="toggle-button-cover">
+                  <div className="button-cover">
+                    <div className="button r" id="button-1">
+                      <input type="checkbox" className="checkbox" checked={role === 'Project Manager'} readOnly />
+                      <div className="knobs"></div>
+                      <div className="layer"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </form>
-    </div>
+          </form>
+      </div>
 
       <div className="login">
         <form>
@@ -161,6 +169,7 @@ function Auth() {
       </div>
     </div>
   </div>
+
   );
   }
   

@@ -4,6 +4,7 @@
 }
 
 body {
+  z-index: 2;
   margin: 0;
   padding: 0;
   display: flex;
@@ -11,7 +12,7 @@ body {
   align-items: center;
   min-height: 100vh;
   font-family: "Jost", sans-serif;
-  background: linear-gradient(to bottom, #c41e3a, #8f172b, #570e1a);
+  background: linear-gradient(to bottom, #212121, #c41e3a, #212121);
 }
 .main {
   width: 350px;
