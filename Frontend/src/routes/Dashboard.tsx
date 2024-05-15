@@ -89,21 +89,29 @@ function Dashboard() {
                         <button onClick={handleAddCollaborator} className="add-collaborator">
                             + Add Collaborator
                         </button>
-                        <button onClick={() => handleAddTask(selectedBoard)} className="add-task-bottom-right">
-                                + Add Task
-                        </button>
                         </div>
                     <div className="board-columns">
                         <div className="column">
-                            <div className="column-header">To Do</div>
+                            <div className="column-header">To Do
+                                <button onClick={() => handleAddTask(selectedBoard)} className="add-task-button">
+                                        + Add Task
+                                </button>
+                            </div>
                             <div className="column-content">Tasks...</div>
                         </div>
                         <div className="column">
-                            <div className="column-header">In Progress</div>
+                            <div className="column-header">In Progress
+                                <button onClick={() => handleAddTask(selectedBoard)} className="add-task-button">
+                                        + Add Task
+                                </button></div>
                             <div className="column-content">Tasks...</div>
                         </div>
                         <div className="column">
-                            <div className="column-header">Done</div>
+                            <div className="column-header">Done
+                                <button onClick={() => handleAddTask(selectedBoard)} className="add-task-button">
+                                        + Add Task
+                                </button>
+                            </div>
                             <div className="column-content">Tasks...</div>
                         </div>
                     </div>

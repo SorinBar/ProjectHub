@@ -25,7 +25,7 @@
     align-items: center;
     gap: 5px;
     color: #ffffff;
-    background-color: #212121;
+    /* background-color: #212121; */
     padding-bottom: 50px;
 }
 
@@ -148,6 +148,8 @@
 }
 
 .column-header {
+    display: flex;
+    align-items: center;
     padding: 15px 20px;
     background-color: #cdc8c8;
     border-top-left-radius: 8px;
@@ -172,6 +174,7 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-align: center;
 }
 
 .create-board:hover {
@@ -195,10 +198,8 @@
 }
 
 
-.add-task-bottom-right {
-    position: absolute;
-    bottom: 868px; /* Adjust as needed */
-    right: 1300px; /* Adjust as needed */
+.add-task-button {
+    margin-left: auto;
     padding: 8px 16px;
     background-color: #33937F;
     color: white;
@@ -206,10 +207,9 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9em;
-    margin-left: auto; /* Push button to the right */
     transition: background-color 0.3s;
 }
 
-.add-task-bottom-right:hover {
+.add-task-button:hover {
     background-color: #AAD372;
 }
