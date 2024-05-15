@@ -3,7 +3,7 @@ import { UserContext } from '../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 import '../style/Dashboard.css'
 
-// TODO Creare Design Dashboard
+// TODO: Creare Design Dashboard
 
 
 function Dashboard() {
@@ -42,12 +42,12 @@ function Dashboard() {
     
     const handleAddCollaborator = () => {
         alert("Functionality to add a collaborator goes here.");
-        //TODO
+        // TODO:
         // Add functionality to add a collaborator
     };
 
     const handleAddTask = (board: string) => {
-        //TODO
+        // TODO:
         // Add functionality to add a task to the specified board
         alert(`Add task to ${board}`);
     };

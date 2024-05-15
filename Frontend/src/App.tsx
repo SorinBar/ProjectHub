@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import React from 'react';
 import './App.css';
 import Auth from './routes/Auth';
@@ -10,6 +10,7 @@ function App() {
     <UserContextProvider>
       <Router>
         <Routes>
+          <Route path='/' element={<Navigate to="/auth" replace />} />
           <Route path='/auth' element={<Auth/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
         </Routes>

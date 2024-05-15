@@ -44,9 +44,9 @@ public class BackendApplication {
 
 		// Controllers setup
 		userService = new UserService(jdbcTemplate);
-		// TODO Dashboard
-		// TODO Dashboard_Employees
-		// TODO Dashboard_Tasks
+		// TODO: Dashboard
+		// TODO: Dashboard_Employees
+		// TODO: Dashboard_Tasks
 	}
 
 	@GetMapping("/hello")
