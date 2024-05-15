@@ -25,6 +25,8 @@
     align-items: center;
     gap: 5px;
     color: #ffffff;
+    background-color: #212121;
+    padding-bottom: 50px;
 }
 
 /* Board List Styles */
@@ -43,7 +45,7 @@
 }
 
 .board-list-item:hover {
-    background-color: #cccccc;
+    background-color: #c9c9c9;
 }
 
 /* Main Board Area Styles */
@@ -59,10 +61,9 @@
 }
 
 .main-board::before{
-    background-image: url('../style/background_auth.png');
     content: "";
     background-image: url('../style/background_auth.png');
-    opacity: 0.5; /* adjust as needed */
+    opacity: 0.1; /* adjust as needed */
     top: 0;
     left: 0;
     bottom: 0;
@@ -87,21 +88,31 @@
 
 /* Highlight the active board */
 .board-list-item.active {
-    background-color: #d0e0e0;
+    background-color: #FF7C0A;
     color: #333;
     font-weight: bold;
+}
+
+.board-list-item.active:hover {
+    background-color: #ffa04d;
 }
 
 /* Add Collaborator Button Styles */
 .add-collaborator {
     padding: 8px 16px;
-    background-color: #4CAF50;
+    background-color: #33937F;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9em;
     margin-left: auto; /* Push button to the right */
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+.add-collaborator:hover {
+    background-color: #AAD372;
 }
 
 /* Task Item Styles */
@@ -155,7 +166,7 @@
 .create-board {
     padding: 10px;
     margin: 10px 0;
-    background-color: #4CAF50;
+    background-color: #33937F;
     color: white;
     border: none;
     border-radius: 4px;
@@ -164,27 +175,41 @@
 }
 
 .create-board:hover {
-    background-color: #367c39;
+    background-color: #AAD372;
 }
 
 
 .remove-board {
     padding: 10px;
     margin-top: 20px;
-    background-color: #f44336;
+    background-color: #d32f2f;
     color: white;
     border-radius: 4px;
     text-align: center;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .remove-board:hover {
-    background-color: #d32f2f;
+    background-color: #c41e3a;
 }
 
 
 .add-task-bottom-right {
     position: absolute;
-    bottom: 10px; /* Adjust as needed */
-    right: 10px; /* Adjust as needed */
+    bottom: 868px; /* Adjust as needed */
+    right: 1300px; /* Adjust as needed */
+    padding: 8px 16px;
+    background-color: #33937F;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-left: auto; /* Push button to the right */
+    transition: background-color 0.3s;
+}
+
+.add-task-bottom-right:hover {
+    background-color: #AAD372;
 }
