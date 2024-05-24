@@ -1,123 +1,212 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../context/UserContext';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import '../style/Dashboard.css'
-import backgroundImage from '../style/background_auth.png';
+import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import Draggable from '../components/Draggable';
+import Droppable from '../components/Droppable';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { 
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    TextField
+} from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useNavigate } from 'react-router-dom';
 
-// TODO: Creare Design Dashboard
-
+interface Task {
+    id: string;
+    name: string;
+    type: 'TODO' | 'INPROGRESS' | 'DONE'
+}
 
 function Dashboard() {
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const { userEmail, userRole, userJwt } = useContext(UserContext);
-    const [boards, setBoards] = useState<string[]>([]);
-    const [selectedBoard, setSelectedBoard] = useState<string | null>(null);
+    const [dialog, setDialog] = useState(false);
+    const [newType, setNewType] = useState<'TODO' | 'INPROGRESS' | 'DONE'>('TODO');
+    const [tasks, setTasks] = useState<Task[]>([]);
+    const [input, setInput] = useState('');
 
-    const handleBoardSelection = (board: string) => {
-        setSelectedBoard(board);
-    };
-
-
-    const handleAddBoard = () => {
-        if (boards.length >= 4) {
-            alert("Maximum number of boards created.");
-        } else {
-            let newBoardNumber = 1;
-            while (boards.includes(`Board ${newBoardNumber}`)) {
-                newBoardNumber++;
-            }
-            const newBoard = `Board ${newBoardNumber}`;
-            setBoards([...boards, newBoard]);
-            setSelectedBoard(newBoard);
+    useEffect(() => {
+        if (userJwt == '') {
+            // Decomment for presentation
+            // navigate('/auth');
         }
-    };
+    }, [])
 
-
-    const handleRemoveBoard = (board: string) => {
-        const confirmation = window.confirm(`Are you sure you want to delete ${board}?`);
-        if (confirmation) {
-            setBoards(prevBoards => prevBoards.filter(b => b !== board));
-            setSelectedBoard(null);
-        }
-    };
-    
     const handleAddCollaborator = () => {
-        alert("Functionality to add a collaborator goes here.");
-        // TODO:
-        // Add functionality to add a collaborator
+        alert("TODO");
     };
 
-    const handleAddTask = (board: string) => {
-        // TODO:
-        // Add functionality to add a task to the specified board
-        alert(`Add task to ${board}`);
+    const handleAddTask = (type: string) => {
+        setNewType(type as 'TODO' | 'INPROGRESS' | 'DONE')
+        setDialog(true);       
     };
     
+    function handleDragEnd({over, active}: DragEndEvent) {
+        console.log(tasks);
+        if (!over) {
+            return;
+        }
+        if (over.id === 'DELETE') {
+            const updatedTasks = tasks.filter((task: Task) => {
+                if (task.id === active.id) {
+                    return false;
+                }
+                return true;
+            });
+            setTasks(updatedTasks);
+        }
+        else {
+            const updatedTasks = tasks.map((task: Task) => {
+                if (task.id === active.id) {
+                    task.type = over.id as 'TODO' | 'INPROGRESS' | 'DONE';
+                }
+                return task;
+            })
+            setTasks(updatedTasks);
+        }
+      }
+
     return (
         <div className="dashboard-container">
             <div className="sidebar">
-                <div className="user-details">
-                    <p>Email: {userEmail}</p>
-                    <p>Role: {userRole}</p>
-                    <p>JWT: {userJwt}</p>
-                </div>
-                <button onClick={handleAddBoard} className="create-board">
-                    Create Board
-                </button>
-                
-                {boards.map(board => (
-                    <div key={board}
-                            className={`board-list-item ${board === selectedBoard ? 'active' : ''}`}
-                            onClick={() => handleBoardSelection(board)}>
-                        {board}
-                    </div>
-                ))}
-                <div className="remove-board" onClick={() => {
-                    if (selectedBoard) {
-                        handleRemoveBoard(selectedBoard);
-                    }
+                <div style={{
+                    display: 'flex',
+                    width: "100%",
+                    justifyContent: 'center'
                 }}>
-                    Remove Board
+                    <AccountCircleIcon style={{
+                        color: 'white',
+                        fontSize: 50
+                    }}/>
+                </div>
+                <div className="user-details">
+                    <p>{userEmail}</p>
+                    <p>{userRole}</p>
                 </div>
             </div>
-            <div className="main-board">
-                {selectedBoard&& (
-                <div className="board">
-                    <div className="board-header">{selectedBoard}</div>
+            <DndContext onDragEnd={handleDragEnd}>
+                <div className="main-board">
+                    <div className="board">
                         <div className="header-content">
-                        <p>Content for {selectedBoard}</p>
-                        <button onClick={handleAddCollaborator} className="add-collaborator">
-                            + Add Collaborator
-                        </button>
+                            <button onClick={handleAddCollaborator} className="add-collaborator">
+                                + Add Collaborator
+                            </button>
                         </div>
-                    <div className="board-columns">
-                        <div className="column">
-                            <div className="column-header">To Do
-                                <button onClick={() => handleAddTask(selectedBoard)} className="add-task-button">
-                                        + Add Task
-                                </button>
+                        <div className="board-columns">
+                            <div className="column">
+                                <div className="column-header">To Do
+                                    <button onClick={() => handleAddTask('TODO')} className="add-task-button">
+                                        <PostAddIcon/>
+                                    </button>
+                                </div>
+                                <Droppable id="TODO">
+                                    <div className="column-content">
+                                        {tasks.filter((task: Task) => task.type === 'TODO').map((task, index) => (
+                                            <Draggable key={task.id} id={task.id}>
+                                                <div>{task.name}</div>
+                                            </Draggable>
+                                        ))}
+                                    </div>
+                                </Droppable>
                             </div>
-                            <div className="column-content">Tasks...</div>
-                        </div>
-                        <div className="column">
-                            <div className="column-header">In Progress
-                                <button onClick={() => handleAddTask(selectedBoard)} className="add-task-button">
-                                        + Add Task
-                                </button></div>
-                            <div className="column-content">Tasks...</div>
-                        </div>
-                        <div className="column">
-                            <div className="column-header">Done
-                                <button onClick={() => handleAddTask(selectedBoard)} className="add-task-button">
-                                        + Add Task
-                                </button>
+                            <div className="column">
+                                <div className="column-header">In Progress
+                                    <button onClick={() => handleAddTask('INPROGRESS')} className="add-task-button">
+                                        <PostAddIcon/>
+                                    </button></div>
+                                    <Droppable id="INPROGRESS">
+                                        <div className="column-content">
+                                            {tasks.filter((task: Task) => task.type === 'INPROGRESS').map((task, index) => (
+                                                <Draggable key={task.id} id={task.id}>
+                                                    <div>{task.name}</div>
+                                                </Draggable>
+                                            ))}
+                                        </div>
+                                    </Droppable>
                             </div>
-                            <div className="column-content">Tasks...</div>
+                            <div className="column">
+                                <div className="column-header">Done
+                                    <button onClick={() => handleAddTask('DONE')} className="add-task-button">
+                                        <PostAddIcon/>
+                                    </button>
+                                </div>
+                                <Droppable id="DONE">
+                                    <div className="column-content">
+                                        {tasks.filter((task: Task) => task.type === 'DONE').map((task, index) => (
+                                            <Draggable key={task.id} id={task.id}>
+                                                <div>{task.name}</div>
+                                            </Draggable>
+                                        ))}
+                                    </div>
+                                </Droppable>
+                            </div>
+                        </div>
+                        <div style={{
+                            position: 'absolute',
+                            bottom: '10px',
+                            width: '100%',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center'
+                        }}>
+                            <Droppable id="DELETE">
+                                <DeleteIcon fontSize='large' style={{     
+                                    backgroundColor: 'lightgray',
+                                    width: '200px',
+                                    padding: '5px',
+                                    borderRadius: '10px'
+                                }}/>
+                            </Droppable>
                         </div>
                     </div>
+                    <div>
+                        <Dialog open={dialog} onClose={() => {
+                            setDialog(false);
+                        }}>
+                            <DialogContent>
+                                <TextField 
+                                    id="outlined-basic" 
+                                    label="Add task name" 
+                                    variant="standard"
+                                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                        setInput(event.target.value);
+                                    }}
+                                />
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={()=>{
+                                    if (input === '') {
+                                        return;
+                                    }
+                                    const updatedTasks = [...tasks];
+                                    updatedTasks.push({
+                                        id: uuidv4(),
+                                        type: newType,
+                                        name: input
+                                    } as Task);
+                                    setTasks(updatedTasks);
+                                    setInput('');
+                                    setDialog(false);
+                                }} color="primary">
+                                    Add
+                                </Button>
+                                <Button onClick={()=>{
+                                    setDialog(false);
+                                }} color="primary">
+                                    Close
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
+                    </div>
                 </div>
-                )}
-            </div>
+            </DndContext>
         </div>
     );
 }

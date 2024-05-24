@@ -1,215 +1,215 @@
 /* General Layout */
 .dashboard-container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-    background-color: #f0f0f0;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f0f0f0;
 }
 
 /* Sidebar Styles */
 .sidebar {
-    width: 240px;
-    background: linear-gradient(to bottom, #212121, #c41e3a, #212121);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 3;
+  width: 240px;
+  background: linear-gradient(to bottom, #212121, #c41e3a, #212121);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 3;
 }
 
 /* User Details Styles */
 .user-details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    color: #ffffff;
-    /* background-color: #212121; */
-    padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* gap: 5px; */
+  color: #ffffff;
+  /* background-color: #212121; */
+  padding-bottom: 50px;
 }
 
 /* Board List Styles */
 .board-list {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .board-list-item {
-    padding: 10px;
-    background-color: #e0e0e0;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .board-list-item:hover {
-    background-color: #c9c9c9;
+  background-color: #c9c9c9;
 }
 
 /* Main Board Area Styles */
 .main-board {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #ffffff;
-    border-left: 1px solid #ccc;
-    z-index: 2;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #ffffff;
+  border-left: 1px solid #ccc;
+  z-index: 2;
+  position: relative;
 }
 
-.main-board::before{
-    content: "";
-    background-image: url('../style/background_auth.png');
-    opacity: 0.1; /* adjust as needed */
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
+.main-board::before {
+  content: "";
+  background-image: url("../style/background_auth.png");
+  opacity: 0.1; /* adjust as needed */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
 }
 
 /* Board Header Styles */
 .board-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .header-content {
-    display: flex;
-    justify-content: center;
-    flex-grow: 1; 
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 /* Highlight the active board */
 .board-list-item.active {
-    background-color: #FF7C0A;
-    color: #333;
-    font-weight: bold;
+  background-color: #ff7c0a;
+  color: #333;
+  font-weight: bold;
 }
 
 .board-list-item.active:hover {
-    background-color: #ffa04d;
+  background-color: #ffa04d;
 }
 
 /* Add Collaborator Button Styles */
 .add-collaborator {
-    padding: 8px 16px;
-    background-color: #33937F;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin-left: auto; /* Push button to the right */
-    margin-bottom: 20px;
-    transition: background-color 0.3s;
+  padding: 8px 16px;
+  background-color: #33937f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-left: auto; /* Push button to the right */
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
 }
 
 .add-collaborator:hover {
-    background-color: #AAD372;
+  background-color: #aad372;
 }
 
 /* Task Item Styles */
 .item {
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #e9e9e9;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #e9e9e9;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .item:hover {
-    background-color: #d0d0d0;
+  background-color: #d0d0d0;
 }
 
 /* Board Columns Container */
 .board-columns {
-    display: flex;
-    justify-content: space-between;
-    width: 100%; /* Ensures columns take up all available space */
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Ensures columns take up all available space */
 }
 
 /* Individual Column Styles */
 .column {
-    flex: 1; /* Each column takes equal space */
-    margin: 0 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
+  flex: 1; /* Each column takes equal space */
+  margin: 0 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
 }
 
 .column-header {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #cdc8c8;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333;
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #cdc8c8;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
 }
 
 .column-content {
-    padding: 20px;
-    flex-grow: 1;
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: red;
 }
 
-
 .create-board {
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #33937F;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    text-align: center;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #33937f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
 }
 
 .create-board:hover {
-    background-color: #AAD372;
+  background-color: #aad372;
 }
 
-
 .remove-board {
-    padding: 10px;
-    margin-top: 20px;
-    background-color: #d32f2f;
-    color: white;
-    border-radius: 4px;
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #d32f2f;
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .remove-board:hover {
-    background-color: #c41e3a;
+  background-color: #c41e3a;
 }
 
-
 .add-task-button {
-    margin-left: auto;
-    padding: 8px 16px;
-    background-color: #33937F;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    transition: background-color 0.3s;
+  margin-left: auto;
+  padding: 8px 16px;
+  background-color: #33937f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s;
 }
 
 .add-task-button:hover {
-    background-color: #AAD372;
+  background-color: #aad372;
 }
