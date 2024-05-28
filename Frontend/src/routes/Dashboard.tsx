@@ -110,7 +110,7 @@ function Dashboard() {
                                     <div className="column-content">
                                         {tasks.filter((task: Task) => task.type === 'TODO').map((task, index) => (
                                             <Draggable key={task.id} id={task.id}>
-                                                <div>{task.name}</div>
+                                                <div className='task-item'>{task.name}</div>
                                             </Draggable>
                                         ))}
                                     </div>
@@ -125,7 +125,7 @@ function Dashboard() {
                                         <div className="column-content">
                                             {tasks.filter((task: Task) => task.type === 'INPROGRESS').map((task, index) => (
                                                 <Draggable key={task.id} id={task.id}>
-                                                    <div>{task.name}</div>
+                                                    <div className='task-item'>{task.name}</div>
                                                 </Draggable>
                                             ))}
                                         </div>
@@ -141,7 +141,7 @@ function Dashboard() {
                                     <div className="column-content">
                                         {tasks.filter((task: Task) => task.type === 'DONE').map((task, index) => (
                                             <Draggable key={task.id} id={task.id}>
-                                                <div>{task.name}</div>
+                                                <div className='task-item'>{task.name}</div>
                                             </Draggable>
                                         ))}
                                     </div>
@@ -157,7 +157,7 @@ function Dashboard() {
                             justifyContent: 'center'
                         }}>
                             <Droppable id="DELETE">
-                                <DeleteIcon fontSize='large' style={{     
+                                <DeleteIcon id="delete-icon" fontSize='large' style={{     
                                     backgroundColor: 'lightgray',
                                     width: '200px',
                                     padding: '5px',
@@ -171,7 +171,7 @@ function Dashboard() {
                             setDialog(false);
                         }}>
                             <DialogContent>
-                                <TextField 
+                                <TextField
                                     id="outlined-basic" 
                                     label="Add task name" 
                                     variant="standard"
